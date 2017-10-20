@@ -26,8 +26,13 @@ int main() {
 	ld.add(6);
 	ld.add(9);
 	ld.show();
-	ld.remove(3);
+	ld.remove(1);
+	ld.show();
+	ld.remove(10);
+	ld.show();
+	ld.remove(5);
 	ld.show();
 	ld.free();
+	ld.show();
 	return 0;
 }

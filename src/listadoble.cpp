@@ -13,7 +13,6 @@ using namespace std;
 
 ListaDoble::ListaDoble() {
 	ptr = NULL;
-
 }
 
 Node* ListaDoble::getPtr() {
@@ -73,6 +72,40 @@ void ListaDoble::add(int value) {
 }
 
 void ListaDoble::remove(int value) {
+	if (!ptr)
+		return;
+
+	Node* aux = ptr;
+
+	// Si el valor está a la izquierda
+	if (value > aux->getValue()) {
+		while (aux && value > aux->getValue())
+			aux = aux->getNext();
+	}
+	// Si el valor está a la derecha
+	if (value < aux->getValue()) {
+		while (aux && value < aux->getValue())
+			aux = aux->getPrev();
+	}
+
+	cout << endl << "Posicion aux" << endl;
+	if (aux) cout << aux->toString();
+
+	// Si el valor se encontró
+	if (value == aux->getValue()) {
+		Node* prev = aux->getPrev();
+		Node* next = aux->getNext();
+		if (prev)
+			prev->setNext(aux->getNext());
+		if (next)
+			next->setPrev(aux->getPrev());
+		if (prev)
+			ptr = prev;
+		else
+			ptr = next;
+
+		delete aux;
+	}
 }
 
 void ListaDoble::show() {
